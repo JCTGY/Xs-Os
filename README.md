@@ -3,7 +3,6 @@
 
 * [Objective](#objective)
 * [How to use](#how-to-use)
-* [Mandatory](#mandatory)
 * [Bonus](#bonus)
 
 ## Objective
