@@ -24,8 +24,11 @@ implement differnt size of board
 * Size 3X3
 * Size 4X4
 * Size 5X5 
+
 <br>
+
 implement commands for players to navigate
+
 * MAIN -> Back to main selection for size
 * SCORE -> Display the current score
 * NEWGAME -> Reset to a new board
