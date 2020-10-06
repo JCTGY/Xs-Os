@@ -20,8 +20,8 @@ run the program
 ```
 
 ## Bonus
-implement differnt size of board
-implement commands for players to navigate
+implement differnt size of board \
+implement commands for players to navigate 
 * MAIN -> Back to main selection for size
 * SCORE -> Display the current score
 * NEWGAME -> Reset to a new board
