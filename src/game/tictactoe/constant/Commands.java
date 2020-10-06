@@ -2,8 +2,9 @@ package game.tictactoe.constant;
 
 public enum Commands {
 	SCORE("score"), 
-	QUIT("quit"), 
+	NEWGAME("newgame"), 
 	EXIT("exit"),
+	MAIN("main"),
 	HELP("help");
 
 	private String command;

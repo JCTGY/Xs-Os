@@ -2,7 +2,9 @@ package game.tictactoe.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import game.tictactoe.constant.GameConstant;
 import game.tictactoe.model.Board;
@@ -24,24 +26,24 @@ public class GameManager {
 		currentPlayer = playerOne;
 		magicSquare = new MagicSquare();
 	}
-	
-	public boolean checkForWin() {
-		System.out.println("number of empty: " + board.numberOfEmpty());
-		return false;
-	}
-	
-	// TODO: add display score
+
+	// Display the current score
 	public void printScore() {
-		
+		System.out.println("Current Score Board");
+		System.out.println(playerOne.getName() + " Score: " + playerOne.getScore());
+		System.out.println(playerTwo.getName() + " Score: " + playerTwo.getScore());
+		System.out.println("===========================================");
 	}
 	
+	// Display text on Console asking user to input the move
 	public void askForNextMove() {
 		
 		System.out.println(currentPlayer.getName() + 
-				" enter move from [1-" + board.getSize() +
-				"]" + "[1-" + board.getSize() + "]");
+				"'s turn: [" + currentPlayer.getHold() + "] enter move from [1-" + board.getSize() +
+				"]" + "[1-" + board.getSize() + "]\n");
 	}
 	
+	// Input position for the move, and make the move
 	public boolean move(int x, int y) {
 		if (!checkInputCoor(x, y)) return false;
 		if (board.getCharOfPosition(x, y) != GameConstant.empty) {
@@ -52,24 +54,31 @@ public class GameManager {
 		board.placeMove(x, y, currentPlayer.getHold());
 		board.printBoard();
 		if (board.numberOfEmpty() < (size * size - size))
-			checkForResult();
+			if (checkForResult()) reset();
 		currentPlayer = (currentPlayer.equals(playerOne)) 
 				? playerTwo : playerOne;
 		return true;
 	}
 	
-	public boolean checkInputCoor(int x, int y) {
-		int size = board.getSize();
-		if (x >= size || x < 0 || y >= size || y < 0) {
-			return false;
-		}
-		return true;
+	// Reset to a new Game
+	public void reset() {
+		printScore();
+		System.out.println("============== New Game Start =============");
+		board.clearBoard();
+		board.printBoard();
 	}
 	
-	public boolean checkForResult() {
+	public void changeBoardSize(int size) {
+		
+		if (size != board.getSize()) {
+			board.resize(size);
+		}
+	}
+	
+	// Check if someone win using the magic board
+	private boolean checkForResult() {
 		List<List<Integer>> coors = new ArrayList<List<Integer>>();
 		int size = board.getSize();
-		int sum = magicSquare.getSumOfMagicSquare(size);
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				if (board.getCharOfPosition(x, y) == currentPlayer.getHold()) {
@@ -78,28 +87,31 @@ public class GameManager {
 			}
 		}
 		
-		List<Integer> magicArray = magicSquare.getMagicArray(coors, size);
-		System.out.println("coors: " + coors);
-		System.out.println("magicArray: " + magicArray);
-		if (magicArray.isEmpty()) return false;
-		final int arraySize = magicArray.size();
-		for (int i = 0; i < arraySize - 2; i++) {
-			for (int j = i + 1; j < arraySize - 1; j++) {
-				for (int k = j + 1; k < arraySize; k++) {
-					if (magicArray.get(i) + magicArray.get(j) + magicArray.get(k) == sum) {
-						currentPlayerWin();
-						return true;
-					}
-				}
-			}
+		if (magicSquare.hasMagicLink(coors, size)) {
+			currentPlayerWin();
+			return true;
+		} else if (board.numberOfEmpty() == 0) {
+			System.out.println("Game Tie");
+			return true;
 		}
 		return false;
 	}
 	
 	// helper function
 	
+	// Check if it is a valid input coor
+	private boolean checkInputCoor(int x, int y) {
+		int size = board.getSize();
+		if (x >= size || x < 0 || y >= size || y < 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	// display text for the player win
 	private void currentPlayerWin() {
 		
 		System.out.println(currentPlayer.getName() + " WIN!");
+		currentPlayer.winGame();
 	}
 }
