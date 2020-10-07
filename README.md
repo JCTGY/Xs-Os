@@ -35,4 +35,6 @@ implement commands for players to navigate
 * EXIT -> Exit the game
 * HELP -> Display the instruction
 
-<img src="/resources/leaderboard.png" width="100"
+<img src="resources/lion.jpeg" width="200">
+
+<img src="resources/leaderboard.png" width="100"
