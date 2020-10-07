@@ -28,8 +28,11 @@ implement differnt size of board
 
 implement commands for players to navigate
 
-* MAIN -> Back to main selection for size
+* SIZE -> Back to main selection for resize the board
 * SCORE -> Display the current score
 * NEWGAME -> Reset to a new board
+* LEADERBOARD -> display current leaderboard
 * EXIT -> Exit the game
 * HELP -> Display the instruction
+
+![](resources/leaderboard.png)
