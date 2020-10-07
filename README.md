@@ -34,5 +34,4 @@ implement commands for players to navigate
 * LEADERBOARD -> display current leaderboard
 * EXIT -> Exit the game
 * HELP -> Display the instruction
-
-![](resources/leaderboard.png | width=100)
+<img src="resources/leaderboard.png" width="100"
