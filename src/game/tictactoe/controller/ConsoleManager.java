@@ -1,9 +1,9 @@
-package game.tictactoe.view;
+package game.tictactoe.controller;
 
 import java.util.Scanner;
 
 import game.tictactoe.constant.Commands;
-import game.tictactoe.controller.GameManager;
+import game.tictactoe.model.GameManager;
 
 public class ConsoleManager {
 
@@ -25,12 +25,14 @@ public class ConsoleManager {
 				gameManager.reset();
 			} else if (message.equalsIgnoreCase(Commands.SCORE.name())) {
 				gameManager.printScore();
-			} else if (message.equalsIgnoreCase(Commands.MAIN.name())) {
+			} else if (message.equalsIgnoreCase(Commands.SIZE.name())) {
 				return false ; 
 			} else if (message.equalsIgnoreCase(Commands.EXIT.name())) {
 				return true;
 			} else if (message.equalsIgnoreCase(Commands.HELP.name())) {
 				System.out.println(instruction);
+			} else if (message.equalsIgnoreCase(Commands.LEADERBOARD.name())) {
+				gameManager.getLeaderboard().printLeaderBoard();
 			}
 			
 			String[] coor = message.split(" ");

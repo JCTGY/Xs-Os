@@ -4,7 +4,8 @@ public enum Commands {
 	SCORE("score"), 
 	NEWGAME("newgame"), 
 	EXIT("exit"),
-	MAIN("main"),
+	SIZE("size"),
+	LEADERBOARD("leaderboard"),
 	HELP("help");
 
 	private String command;

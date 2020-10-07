@@ -1,6 +1,6 @@
     Instruction:
      
-     MAIN -> Back to main selection for size
+     SIZE -> Back to main selection for size
      
      SCORE -> Display the current score
      
@@ -10,5 +10,6 @@
      
      HELP -> Display the instruction
      
+     Commands will be use after the game start
      ============================================================================================
 

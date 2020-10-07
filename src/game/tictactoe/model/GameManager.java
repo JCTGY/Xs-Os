@@ -1,4 +1,4 @@
-package game.tictactoe.controller;
+package game.tictactoe.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import game.tictactoe.constant.GameConstant;
-import game.tictactoe.model.Board;
-import game.tictactoe.model.MagicSquare;
-import game.tictactoe.model.Player;
 
 public class GameManager {
 
@@ -18,13 +15,20 @@ public class GameManager {
 	private Player playerTwo;
 	private Player currentPlayer;
 	private MagicSquare magicSquare;
+	private Leaderboard leaderboard;
 	
-	public GameManager(Board board, String nameOne, String nameTwo) {
+	public GameManager(Board board, String nameOne, 
+			String nameTwo, Leaderboard leaderboard) {
 		this.board = board;
 		playerOne = new Player(nameOne, GameConstant.circle);
 		playerTwo = new Player(nameTwo, GameConstant.cross);
 		currentPlayer = playerOne;
 		magicSquare = new MagicSquare();
+		this.leaderboard = leaderboard;
+	}
+	
+	public Leaderboard getLeaderboard() {
+		return leaderboard;
 	}
 
 	// Display the current score
@@ -32,12 +36,13 @@ public class GameManager {
 		System.out.println("Current Score Board");
 		System.out.println(playerOne.getName() + " Score: " + playerOne.getScore());
 		System.out.println(playerTwo.getName() + " Score: " + playerTwo.getScore());
-		System.out.println("===========================================");
+		System.out.println("===========================================\n");
 	}
 	
 	// Display text on Console asking user to input the move
 	public void askForNextMove() {
 		
+		board.printBoard();
 		System.out.println(currentPlayer.getName() + 
 				"'s turn: [" + currentPlayer.getHold() + "] enter move from [1-" + board.getSize() +
 				"]" + "[1-" + board.getSize() + "]\n");
@@ -52,7 +57,6 @@ public class GameManager {
 		int size = board.getSize();
 		
 		board.placeMove(x, y, currentPlayer.getHold());
-		board.printBoard();
 		if (board.numberOfEmpty() < (size * size - size))
 			if (checkForResult()) reset();
 		currentPlayer = (currentPlayer.equals(playerOne)) 
@@ -65,7 +69,6 @@ public class GameManager {
 		printScore();
 		System.out.println("============== New Game Start =============");
 		board.clearBoard();
-		board.printBoard();
 	}
 	
 	public void changeBoardSize(int size) {
@@ -113,5 +116,6 @@ public class GameManager {
 		
 		System.out.println(currentPlayer.getName() + " WIN!");
 		currentPlayer.winGame();
+		leaderboard.addScore(currentPlayer.getName());
 	}
 }
