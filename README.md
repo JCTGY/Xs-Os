@@ -35,4 +35,4 @@ implement commands for players to navigate
 * EXIT -> Exit the game
 * HELP -> Display the instruction
 
-![](resources/leaderboard.png)
+![](resources/leaderboard.png | width=100)
