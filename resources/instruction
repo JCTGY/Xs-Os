@@ -6,6 +6,8 @@
      
      NEWGAME -> Reset to a new board
      
+     LEADERBOARD -> display current leaderboard
+     
      EXIT -> Exit the game
      
      HELP -> Display the instruction
